@@ -5,6 +5,7 @@ from api_interaction import APIClient
 # Connection to apiclient via the API_interaction class
 api_client = APIClient()
 
+
 class BettingGUI(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -34,6 +35,7 @@ class BettingGUI(tk.Tk):
         self.sports_frame.pack(side=tk.LEFT, fill="y")
         self.events_frame.pack(side=tk.LEFT, fill="y")
         self.odds_frame.pack(side=tk.LEFT, fill="y")
+        self.resizable(0, 0)
         self.display_sports(api_client.get_sports())
 
     def display_sports(self, sports_data):
@@ -42,21 +44,21 @@ class BettingGUI(tk.Tk):
         for sport in sports_data:
             self.sports_list.insert("end", sport["title"])
 
-    def display_games(self, event_data):
+    def display_events(self, event_data):
         """This method breaks down the event string to differ games/sports from odds and then seperates them into a
         dicitonary. """
         self.events_list.delete(0, tk.END)  # Clear the listbox
-        self.odds_by_event_id = {}   # Clearing dictionary after selecting a different event.
+        self.odds_by_event_id = {}  # Clearing dictionary after selecting a different event.
 
         seen_event_ids = set()  # Track unique event IDs
         for event in event_data:
             event_name = ''
             if event["id"] not in seen_event_ids:  # Check for duplicates events
-                seen_event_ids.add(event["id"])
-                event_name = f"{event['home_team']} vs {event['away_team']}"
-                self.events_list.insert(0, event_name)
+                seen_event_ids.add(event["id"]) # Grabbing the event id
+                event_name = f"{event['home_team']} vs {event['away_team']}"  # Capturing each match up
+                self.events_list.insert(0, event_name)  # Inserting matchups into listbox
 
-            odds_data = []
+            odds_data = []  # Storing odds data for each event
             for bookmaker in event["bookmakers"]:
                 for market in bookmaker["markets"]:
                     for outcome in market["outcomes"]:
@@ -86,7 +88,7 @@ class BettingGUI(tk.Tk):
                     event_data = api_client.get_odds(sport["key"])
 
             # Update the events display
-            self.display_games(event_data)
+            self.display_events(event_data)
 
     def on_event_selected(self, event):
         """This method handles event selection"""
@@ -108,5 +110,3 @@ class BettingGUI(tk.Tk):
                 odds_text = f"{bookmaker_odds['bookmaker']} - {bookmaker_odds['market']} - {bookmaker_odds['outcome']}: {bookmaker_odds['price']}"
                 self.odds_list.insert("end", odds_text)
 
-            for odds_button in self.odds_buttons:
-                odds_button.pack()  # Adjusting layout
