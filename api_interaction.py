@@ -1,5 +1,7 @@
 import requests
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 """https://the-odds-api.com is a free API that allows you to to query across several different Sports books. They 
 have several different subscriptions but for their API but I used the free licence which allows around 500 request 
@@ -10,7 +12,7 @@ class APIClient:
     """Handles communication with the Odds API."""
 
     def __init__(self):
-        self.api_key = '598c939b871f79eb9a49b1416c75e0e8' # API_KEY
+        self.api_key = os.getenv("API_KEY")# API_KEY
         self.base_url = "https://api.the-odds-api.com/v4" # Base endpoint URL
 
     def get_sports(self):
