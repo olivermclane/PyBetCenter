@@ -16,6 +16,14 @@ Create a .env file and follow the below format.
 API_KEY="{your_api_key}"
 ```
 
+# Step 3
+
+Next, you will need to install the dependencies and enable your python environment.
+
+```
+python3 -m venv nenv
+```
+
 # Run
 Once this is complete, run main.py and enjoy the UI to explore different head-to-head odds and outright odds.
 
