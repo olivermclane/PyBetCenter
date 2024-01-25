@@ -1,5 +1,5 @@
-This basic tkinter application is a viewing application for all of the odds in sports betting. 
-This spans across several 
+This basic tkinter application is a viewing application for all the odds in sports betting. 
+This spans across several different sports books, so you can view odds for any game.
 
 
 For this to work you do need to get a API-key.
@@ -13,7 +13,7 @@ After registration is complete, the API KEY will be sent to your email. Copy tha
 ```{python}
 API_KEY="{your_api_key}"
 ```
-Once this is complete, run main.py and enjoy the a UI to explore different head-to-head odds and outright odds.
+Once this is complete, run main.py and enjoy the UI to explore different head-to-head odds and outright odds.
 
 
-It is worth noting, the games that have head to head odds will populate with None Vs None, click on that and you can still retrieve odds for outright.
+It is worth noting, the games that have head-to-head odds will populate with None Vs None, click on that and you can still retrieve odds for outright.
